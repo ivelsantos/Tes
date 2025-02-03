@@ -1,0 +1,74 @@
+[language-server]
+clangd = { command = "clangd" }
+tailwindcss-ls = {command = "tailwindcss-language-server", args=["--stdio"]}
+
+[[language]]
+name = "c"
+scope = "source.c"
+injection-regex = "c"
+file-types = ["c"] # TODO: ["h"]
+comment-token = "//"
+language-servers = [ "clangd" ]
+indent = { tab-width = 4, unit = "    " }
+
+[language-server.pylsp.config.pylsp]
+plugins.ruff.enabled = true
+plugins.black.enabled = true
+
+[[language]]
+name = "go"
+scope = "source.go"
+injection-regex = "go"
+file-types = ["go"]
+roots = ["go.work", "go.mod"]
+auto-format = true
+comment-token = "//"
+block-comment-tokens = { start = "/*", end = "*/" }
+language-servers = [ "gopls", "golangci-lint-lsp" ]
+indent = { tab-width = 4, unit = "\t" }
+
+[[language]]
+name = "html"
+scope = "text.html.basic"
+injection-regex = "html"
+file-types = ["html", "htm", "shtml", "xhtml", "xht", "jsp", "asp", "aspx", "jshtm", "volt", "rhtml", "tmpl"]
+block-comment-tokens = { start = "<!--", end = "-->" }
+language-servers = [ "vscode-html-language-server" ]
+auto-format = true
+indent = { tab-width = 2, unit = "  " }
+
+[[grammar]]
+name = "html"
+source = { git = "https://github.com/tree-sitter/tree-sitter-html", rev = "29f53d8f4f2335e61bf6418ab8958dac3282077a" }
+
+[[language]]
+name = "markdown"
+scope = "source.md"
+injection-regex = "md|markdown"
+file-types = ["md", "markdown", "mkd", "mkdn", "mdwn", "mdown", "markdn", "mdtxt", "mdtext", "workbook", { glob = "PULLREQ_EDITMSG" }]
+roots = [".marksman.toml"]
+language-servers = [ "marksman", "markdown-oxide" ]
+indent = { tab-width = 2, unit = "  " }
+block-comment-tokens = { start = "<!--", end = "-->" }
+
+[[grammar]]
+name = "markdown"
+source = { git = "https://github.com/tree-sitter-grammars/tree-sitter-markdown", rev = "62516e8c78380e3b51d5b55727995d2c511436d8", subpath = "tree-sitter-markdown" }
+
+[[language]]
+name = "java"
+scope = "source.java"
+injection-regex = "java"
+file-types = ["java", "jav", "pde"]
+roots = ["pom.xml", "build.gradle", "build.gradle.kts"]
+language-servers = [ "jdtls" ]
+indent = { tab-width = 2, unit = "  " }
+
+[[grammar]]
+name = "java"
+source = { git = "https://github.com/tree-sitter/tree-sitter-java", rev = "09d650def6cdf7f479f4b78f595e9ef5b58ce31e" }
+
+[[language]]
+name = "zig"
+language-servers = [ "zls" ]
+auto-format = true
