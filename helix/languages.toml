@@ -72,3 +72,10 @@ source = { git = "https://github.com/tree-sitter/tree-sitter-java", rev = "09d65
 name = "zig"
 language-servers = [ "zls" ]
 auto-format = true
+
+[language-server.zls]
+config.enable_argument_placeholders = false
+
+[[grammar]]
+name = "zig"
+source = { git = "https://github.com/tree-sitter-grammars/tree-sitter-zig", rev = "eb7d58c2dc4fbeea4745019dee8df013034ae66b" }
